@@ -8,21 +8,22 @@ import PropTypes from "prop-types";
  * @param {string} props.name - The name attribute for the input field.
  * @param {string} props.type - The type attribute for the input field (e.g., 'text', 'email', 'password').
  * @param {string} props.defaultValue - The default value for the input field.
+ * @param {string} props.size - The size of the input.
  *
  * @returns {JSX.Element} A form control element with a label and an input field.
  */
 
-const FormInput = ({ label, name, type, defaultValue }) => {
+const FormInput = ({ label, name, type, defaultValue, size }) => {
   return (
     <div className="form-control">
       <label className="label">
-        <span className="label-text">{label}</span>
+        <span className="label-text capitalize">{label}</span>
       </label>
       <input
         type={type}
         name={name}
         defaultValue={defaultValue}
-        className="input input-bordered"
+        className={`input input-bordered ${size}`}
       />
     </div>
   );
@@ -32,7 +33,8 @@ FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
+  size: PropTypes.string.isRequired,
 };
 
 export default FormInput;
