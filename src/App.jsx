@@ -22,6 +22,9 @@ import { singleProductLoader } from "./pages/SingleProduct.loader";
 import { productsLoader } from "./pages/Products.loader";
 
 // actions
+import { action as registerAction } from "./pages/Register";
+import { action as loginAction } from "./pages/Login";
+import { store } from "./store";
 
 const router = createBrowserRouter([
   {
@@ -53,8 +56,19 @@ const router = createBrowserRouter([
       { path: "orders", element: <Orders /> },
     ],
   },
-  { path: "/login", element: <Login />, errorElement: <Error /> },
-  { path: "/register", element: <Register />, errorElement: <Error /> },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <Error />,
+    action: loginAction(store),
+  },
+
+  {
+    path: "/register",
+    element: <Register />,
+    errorElement: <Error />,
+    action: registerAction,
+  },
 ]);
 
 const App = () => {

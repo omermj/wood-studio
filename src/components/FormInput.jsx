@@ -34,7 +34,7 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   defaultValue: PropTypes.string,
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 
 export default FormInput;
