@@ -49,7 +49,7 @@ const Filters = () => {
         name="price"
         label="Select Price"
         size="range-sm"
-        defaultValue={price}
+        price={price}
       />
 
       {/* SHIPPING */}

@@ -25,7 +25,6 @@ const OrdersList = () => {
           </thead>
           <tbody>
             {orders.map((order) => {
-              console.log(order);
               const id = order.id;
               const { name, address, numItemsInCart, orderTotal, createdAt } =
                 order.attributes;
