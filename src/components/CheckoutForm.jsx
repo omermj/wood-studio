@@ -40,6 +40,9 @@ export const action =
         error?.response?.data?.error?.message ||
         "There was an error placing your error";
       toast.error(errorMessage);
+      if (error.response.status === 401 || error.response.status === 403)
+        return redirect("/login");
+
       return null;
     }
   };
