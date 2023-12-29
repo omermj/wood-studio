@@ -7,7 +7,6 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    console.log(data);
     const response = await customFetch.post("/auth/register", data);
     toast.success("Account created successfully");
     return redirect("/login");

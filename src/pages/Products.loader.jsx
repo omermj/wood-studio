@@ -3,15 +3,15 @@ import { customFetch } from "../utils";
 const url = "/products";
 
 const allProductsQuery = (queryParams) => {
-  const { search, category, company, sort, price, shipping, page } =
+  const { search, category, company, order, price, shipping, page } =
     queryParams;
   return {
     queryKey: [
       "products",
       search ?? "",
-      category ?? "all",
-      company ?? "all",
-      sort ?? "a-z",
+      category ?? "All",
+      company ?? "All",
+      order ?? "A-Z",
       price ?? 100000,
       shipping ?? false,
       page ?? 1,
