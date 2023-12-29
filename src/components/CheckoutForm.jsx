@@ -14,6 +14,7 @@ export const action =
     const { cartItems, orderTotal, numItemsInCart } =
       store.getState().cartState;
     const info = {
+      username: user.username,
       name,
       address,
       chargeTotal: orderTotal,

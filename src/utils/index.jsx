@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const productionUrl = "https://strapi-store-server.onrender.com/api";
+// const productionUrl = "https://strapi-store-server.onrender.com/api";
+const productionUrl = "http://localhost:3001/api";
 
 export const customFetch = axios.create({
   baseURL: productionUrl,
@@ -14,14 +15,13 @@ export const formatPrice = (price) => {
   return dollarsAmount;
 };
 
-export const generateAmountOptions = (number) => {
+export const generateQuantityOptions = (number) => {
   return Array.from({ length: number }, (_, index) => {
-    const amount = index + 1;
+    const quantity = index + 1;
     return (
-      <option key={amount} value={amount}>
-        {amount}
+      <option key={quantity} value={quantity}>
+        {quantity}
       </option>
     );
   });
 };
-

@@ -11,7 +11,7 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      const response = await customFetch.post("/auth/local", data);
+      const response = await customFetch.post("/auth/token", data);
       store.dispatch(loginUser(response.data));
       toast.success("Logged in successfully");
       return redirect("/");
@@ -19,7 +19,9 @@ export const action =
       const errorMessage =
         error?.response?.data?.error?.message ||
         "Please double check your credentials";
-      toast.error(errorMessage);
+      Array.isArray(errorMessage)
+        ? errorMessage.map((err) => toast.error(err))
+        : toast.error(errorMessage);
       return null;
     }
   };
@@ -30,8 +32,8 @@ const Login = () => {
 
   const loginAsGuest = async () => {
     try {
-      const response = await customFetch.post("/auth/local", {
-        identifier: "test@test.com",
+      const response = await customFetch.post("/auth/token", {
+        username: "test@test.com",
         password: "secret",
       });
       dispatch(loginUser(response.data));
@@ -51,7 +53,7 @@ const Login = () => {
           className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
         >
           <h4 className="text-center text-3xl font-bold">Login</h4>
-          <FormInput type="email" label="email" name="identifier" />
+          <FormInput type="text" label="username" name="username" />
           <FormInput type="password" label="password" name="password" />
           <div className="mt-4">
             <SubmitBtn text="Login" />

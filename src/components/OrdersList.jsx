@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { formatPrice } from "../utils";
+
 day.extend(advancedFormat);
 
 const OrdersList = () => {
@@ -27,15 +29,14 @@ const OrdersList = () => {
             {orders.map((order) => {
               const id = order.id;
               const { name, address, numItemsInCart, orderTotal, createdAt } =
-                order.attributes;
+                order;
               const date = day(createdAt).format("hh:mm a - MMM Do, YYYY");
-
               return (
                 <tr key={id}>
                   <td>{name}</td>
                   <td>{address}</td>
                   <td>{numItemsInCart}</td>
-                  <td>{orderTotal}</td>
+                  <td>{formatPrice(orderTotal)}</td>
                   <td className="hidden sm:block">{date}</td>
                 </tr>
               );

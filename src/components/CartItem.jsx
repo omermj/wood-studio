@@ -1,10 +1,10 @@
-import { formatPrice, generateAmountOptions } from "../utils";
+import { formatPrice, generateQuantityOptions } from "../utils";
 import { removeItem, editItem } from "../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 const CartItem = ({ cartItem }) => {
-  const { cartID, title, price, image, amount, company, productColor } =
+  const { cartID, title, price, image, quantity, company, productColor } =
     cartItem;
 
   const dispatch = useDispatch();
@@ -12,8 +12,8 @@ const CartItem = ({ cartItem }) => {
   const removeItemFromCart = () => {
     dispatch(removeItem({ cartID }));
   };
-  const handleAmount = (e) => {
-    dispatch(editItem({ cartID, amount: parseInt(e.target.value) }));
+  const handleQuantity = (e) => {
+    dispatch(editItem({ cartID, quantity: parseInt(e.target.value) }));
   };
 
   return (
@@ -47,19 +47,19 @@ const CartItem = ({ cartItem }) => {
       </div>
 
       <div className="sm:ml-12">
-        {/* AMOUNT */}
+        {/* QUANTITY */}
         <div className="form-control max-w-xs">
-          <label htmlFor="amount" className="label p-0">
-            <span className="label-text">Amount</span>
+          <label htmlFor="quantity" className="label p-0">
+            <span className="label-text">Quantity</span>
           </label>
           <select
-            name="amount"
-            id="amount"
+            name="quantity"
+            id="quantity"
             className="mt-2 select select-base select-bordered select-xs"
-            value={amount}
-            onChange={handleAmount}
+            value={quantity}
+            onChange={handleQuantity}
           >
-            {generateAmountOptions(amount + 5)}
+            {generateQuantityOptions(quantity + 5)}
           </select>
         </div>
 

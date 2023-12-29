@@ -1,31 +1,30 @@
 import { useLoaderData, Link } from "react-router-dom";
-import { formatPrice, customFetch, generateAmountOptions } from "../utils";
+import { formatPrice, generateQuantityOptions } from "../utils";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
 
 const SingleProduct = () => {
   const { product } = useLoaderData();
-  const { image, title, price, description, colors, company } =
-    product.attributes;
+  const { image, title, price, description, colors, company } = product;
   const dollarsAmount = formatPrice(price);
 
   const [productColor, setProductColor] = useState(colors[0]);
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
-  const handleAmount = (e) => {
-    setAmount(parseInt(e.target.value));
+  const handleQuantity = (e) => {
+    setQuantity(parseInt(e.target.value));
   };
 
   const cartProduct = {
     cartID: product.id + productColor,
-    productID: product.id,
+    productId: product.id,
     image,
     title,
     price,
     company,
     productColor,
-    amount,
+    quantity,
   };
 
   const dispatch = useDispatch();
@@ -83,20 +82,20 @@ const SingleProduct = () => {
               })}
             </div>
           </div>
-          {/* AMOUNT */}
+          {/* QUANTITY */}
           <div className="form-control w-full max-w-xs">
-            <label className="label" htmlFor="amount">
+            <label className="label" htmlFor="quantity">
               <h4 className="text-md font-medium tracking-wider capitalize">
-                Amount
+                Quantity
               </h4>
             </label>
             <select
               className="select select-secondary select-bordered select-md"
-              id="amount"
-              value={amount}
-              onChange={handleAmount}
+              id="quantity"
+              value={quantity}
+              onChange={handleQuantity}
             >
-              {generateAmountOptions(20)}
+              {generateQuantityOptions(20)}
             </select>
           </div>
           {/* CART */}

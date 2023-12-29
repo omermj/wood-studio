@@ -22,12 +22,12 @@ const cartSlice = createSlice({
       const { product } = action.payload;
       const item = state.cartItems.find((i) => i.cartID === product.cartID);
       if (item) {
-        item.amount += product.amount;
+        item.quantity += product.quantity;
       } else {
         state.cartItems.push(product);
       }
-      state.numItemsInCart += product.amount;
-      state.cartTotal += product.price * product.amount;
+      state.numItemsInCart += product.quantity;
+      state.cartTotal += product.price * product.quantity;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success("Item added to cart");
     },
@@ -39,17 +39,17 @@ const cartSlice = createSlice({
       const { cartID } = action.payload;
       const product = state.cartItems.find((i) => i.cartID === cartID);
       state.cartItems = state.cartItems.filter((i) => i.cartID !== cartID);
-      state.numItemsInCart -= product.amount;
-      state.cartTotal -= product.price * product.amount;
+      state.numItemsInCart -= product.quantity;
+      state.cartTotal -= product.price * product.quantity;
       cartSlice.caseReducers.calculateTotals(state);
       toast.error("Item removed from card");
     },
     editItem: (state, action) => {
-      const { cartID, amount } = action.payload;
+      const { cartID, quantity } = action.payload;
       const item = state.cartItems.find((i) => i.cartID === cartID);
-      state.numItemsInCart += amount - item.amount;
-      state.cartTotal += item.price * (amount - item.amount);
-      item.amount = amount;
+      state.numItemsInCart += quantity - item.quantity;
+      state.cartTotal += item.price * (quantity - item.quantity);
+      item.quantity = quantity;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success("Cart updated");
     },
